@@ -7,8 +7,7 @@ import javax.persistence.*
 @MappedSuperclass
 open class Session(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Id
-        val id: Long,
+        @Id val id: Long,
         @Column val start: Timestamp,
         @Column val end: Timestamp,
 
@@ -24,7 +23,7 @@ open class Session(
         if (other !is Session) {
             return false
         }
-            
+
         other as Session
         return id == other.id && start == other.start && end == other.end
     }
