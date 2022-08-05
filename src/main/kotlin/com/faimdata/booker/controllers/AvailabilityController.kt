@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/availabilities")
+@RequestMapping("/availabilities")
 class AvailabilityController(
         @Autowired private val availabilityRepo: AvailabilityRepo
 ) {
-
     @GetMapping("/")
     fun getAvailabilities(): List<Availability> {
         return availabilityRepo.findAll()
@@ -26,10 +25,5 @@ class AvailabilityController(
     fun deleteAvailability(@PathVariable id: Long): String {
         availabilityRepo.deleteById(id)
         return "Deleting availability..."
-    }
-
-    @GetMapping("/provider/{providerId}")
-    fun getProviderAvailabilities(@PathVariable providerId: String): List<Availability> {
-        return availabilityRepo.getProviderAvailabilities(providerId)
     }
 }
