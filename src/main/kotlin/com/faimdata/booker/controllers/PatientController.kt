@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping("/patients")
 class PatientController(
         @Autowired private val patientRepo: PatientRepo
 ) {
@@ -21,15 +21,15 @@ class PatientController(
         return "Saved patient..."
     }
 
-    @PutMapping("/update/{id}")
-    fun updateUser(@PathVariable id: String, @RequestBody patient: Patient) {
-        deletePatient(id)
-        savePatient(patient)
-    }
-
     @DeleteMapping("/delete/{id}")
     fun deletePatient(@PathVariable id: String): String {
+        if (patientRepo.containsAppointments(patientId = id)) {
+            return "Patient cannot be deleted... has upcoming appointments"
+        }
+        // TODO: Should delete attached appointments
         patientRepo.deleteById(id)
         return "Deleted patient..."
     }
+
+    // TODO: if we want to add an update function, we should also update the clinic and appointments attached to current id
 }
