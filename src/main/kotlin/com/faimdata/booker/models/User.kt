@@ -1,15 +1,15 @@
 package com.faimdata.booker.models
 
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
+import javax.persistence.*
 
 @MappedSuperclass
 open class User(
         @Column var firstname: String,
         @Column var lastname: String,
-        @Id var id: String = firstname + lastname
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "patient", orphanRemoval = true)
+        val appointments: Set<Appointment>,
+        @Id var id: String = firstname + lastname,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) {

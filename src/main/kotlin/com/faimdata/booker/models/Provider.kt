@@ -7,6 +7,7 @@ import javax.persistence.OneToMany
 @Entity
 class Provider(
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "provider", orphanRemoval = true)
-        var availabilities: Set<Availability>,
+        val availabilities: Set<Availability>,
         firstname: String,
-        lastname: String) : User(firstname, lastname)
+        lastname: String,
+        appointments: Set<Appointment>) : User(firstname, lastname, appointments)
