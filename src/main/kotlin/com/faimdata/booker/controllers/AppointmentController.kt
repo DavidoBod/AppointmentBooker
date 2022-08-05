@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/appoinments")
+@RequestMapping("/appointments")
 class AppointmentController(
         @Autowired private val appointmentRepo: AppointmentRepo
 ) {
@@ -16,7 +16,7 @@ class AppointmentController(
     }
 
     @PostMapping("/save")
-    fun saveAppointment(@PathVariable id: String, appointment: Appointment) {
+    fun saveAppointment(appointment: Appointment) {
         // TODO: does provider have this availability?
         // TODO: remove this availability from the provider
         appointmentRepo.save(appointment)
