@@ -23,12 +23,12 @@ class PatientController(
 
     @DeleteMapping("/delete/{id}")
     fun deletePatient(@PathVariable id: String): String {
-        if (patientRepo.containsAppointments(patientId = id)) {
-            return "Patient cannot be deleted... has upcoming appointments"
+        if (!patientRepo.existsById(id)) {
+            return "Patient does not exist..."
         }
-        // TODO: Should delete attached appointments
+        
         patientRepo.deleteById(id)
-        return "Deleted patient..."
+        return "Deleted patient and associated appointments..."
     }
 
     // TODO: if we want to add an update function, we should also update the clinic and appointments attached to current id
