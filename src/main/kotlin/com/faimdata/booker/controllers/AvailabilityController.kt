@@ -4,6 +4,7 @@ import com.faimdata.booker.models.Availability
 import com.faimdata.booker.repositories.AppointmentRepo
 import com.faimdata.booker.repositories.AvailabilityRepo
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -24,10 +25,16 @@ class AvailabilityController(
 
     @PostMapping("/save")
     fun saveAvailability(@RequestBody availability: Availability): String {
-        if (appointmentRepo.containsAppointment(availability.provider.id, availability.start)) {
+        val result = appointmentRepo.containsAppointment(availability.provider.id, availability.start)
+        if (result) {
             return "Provider is unavailable at this time..."
         }
-        availabilityRepo.save(availability)
+        try {
+            availabilityRepo.save(availability)
+        } catch (exception: DataIntegrityViolationException) {
+            return "This provider already has this availability..."
+        }
+
         return "Saved availability..."
     }
 
