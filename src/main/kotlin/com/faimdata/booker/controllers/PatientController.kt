@@ -21,6 +21,9 @@ class PatientController(
         return "Saved patient..."
     }
 
+    /**
+     * Patient's associated appointments will also be deleted thanks to the cascading effect
+     */
     @DeleteMapping("/delete/{id}")
     fun deletePatient(@PathVariable id: String): String {
         if (!patientRepo.existsById(id)) {

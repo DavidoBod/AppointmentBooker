@@ -21,6 +21,9 @@ class ProviderController(
         return "Saved provider..."
     }
 
+    /**
+     * Provider's associated appointments and availabilities will also be deleted thanks to the cascading effect
+     */
     @DeleteMapping("/delete/{id}")
     fun deleteProvider(@PathVariable id: String): String {
         if (!providerRepo.existsById(id)) {

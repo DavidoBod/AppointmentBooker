@@ -28,6 +28,9 @@ class AppointmentController(
         return "Saved appointment..."
     }
 
+    /**
+     * Availability of the provider is recreated when the appointment is deleted
+     */
     @DeleteMapping("/delete/{id}")
     fun deleteAppointment(@PathVariable id: Long) {
         val appointment = appointmentRepo.findById(id).get()

@@ -23,6 +23,9 @@ class AvailabilityController(
         return availabilityRepo.findById(id).get()
     }
 
+    /**
+     * Availability is created if the provider does not have an appointment at the time
+     */
     @PostMapping("/save")
     fun saveAvailability(@RequestBody availability: Availability): String {
         val result = appointmentRepo.containsAppointment(availability.provider.id, availability.start)
@@ -40,6 +43,10 @@ class AvailabilityController(
 
     @DeleteMapping("/delete/{id}")
     fun deleteAvailability(@PathVariable id: Long): String {
+        if (!availabilityRepo.existsById(id)) {
+            return "Availability does not exist..."
+        }
+        
         availabilityRepo.deleteById(id)
         return "Deleting availability..."
     }

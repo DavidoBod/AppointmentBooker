@@ -8,6 +8,7 @@ open class User(
         @Column var firstname: String,
         @Column var lastname: String,
 
+        // connects to the patient_id foreign key in the appointment table
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "patient", orphanRemoval = true)
         val appointments: Set<Appointment>,
 
