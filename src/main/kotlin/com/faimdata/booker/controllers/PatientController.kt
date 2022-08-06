@@ -26,10 +26,8 @@ class PatientController(
         if (!patientRepo.existsById(id)) {
             return "Patient does not exist..."
         }
-        
+
         patientRepo.deleteById(id)
         return "Deleted patient and associated appointments..."
     }
-
-    // TODO: if we want to add an update function, we should also update the clinic and appointments attached to current id
 }

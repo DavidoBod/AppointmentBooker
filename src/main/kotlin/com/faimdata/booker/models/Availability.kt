@@ -9,4 +9,9 @@ import javax.persistence.UniqueConstraint
 @Table(uniqueConstraints = [
     UniqueConstraint(columnNames = ["start", "end", "provider_id"])
 ])
-class Availability(id: Long, start: Timestamp, end: Timestamp, provider: Provider) : Session(id, start, end, provider)
+class Availability(
+        id: Long,
+        start: Timestamp,
+        end: Timestamp,
+        provider: Provider)
+    : Session(id, start, end, provider)

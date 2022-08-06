@@ -10,6 +10,9 @@ class Appointment(
         @ManyToOne
         @JoinColumn
         val patient: Patient,
-        id: Long, start: Timestamp, end: Timestamp, provider: Provider
+        id: Long,
+        start: Timestamp,
+        end: Timestamp,
+        provider: Provider
 ) : Session(id, start, end, provider) {
 }

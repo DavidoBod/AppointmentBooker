@@ -7,9 +7,15 @@ import javax.persistence.*
 open class User(
         @Column var firstname: String,
         @Column var lastname: String,
+
         @OneToMany(cascade = [CascadeType.ALL], mappedBy = "patient", orphanRemoval = true)
         val appointments: Set<Appointment>,
-        @Id var id: String = firstname + lastname,
+
+        @ManyToOne
+        @JoinColumn
+        val clinic: Clinic = Clinic.instance,
+
+        @Id var id: String = firstname + lastname
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) {

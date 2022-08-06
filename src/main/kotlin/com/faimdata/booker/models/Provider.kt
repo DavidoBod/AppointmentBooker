@@ -10,4 +10,5 @@ class Provider(
         val availabilities: Set<Availability>,
         firstname: String,
         lastname: String,
-        appointments: Set<Appointment>) : User(firstname, lastname, appointments)
+        appointments: Set<Appointment>)
+    : User(firstname, lastname, appointments)

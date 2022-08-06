@@ -30,6 +30,4 @@ class ProviderController(
         providerRepo.deleteById(id)
         return "Deleted provider and associated appointments..."
     }
-
-    // TODO: if we want to add an update function, we should also update the clinic and appointments attached to current id
 }
